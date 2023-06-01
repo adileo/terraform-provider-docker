@@ -436,10 +436,10 @@ func resourceDockerContainer() *schema.Resource {
 							ValidateDiagFunc: validateDockerContainerPath(),
 						},
 						"flags": {
-							Type:             schema.TypeString,
-							Description:      "The volume option flags.",
-							Optional:         true,
-							ForceNew:         true,
+							Type:        schema.TypeString,
+							Description: "The volume option flags.",
+							Optional:    true,
+							ForceNew:    true,
 						},
 						"volume_name": {
 							Type:        schema.TypeString,
