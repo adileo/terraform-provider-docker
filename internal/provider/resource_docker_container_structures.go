@@ -212,7 +212,8 @@ func volumeSetToDockerVolumes(volumes *schema.Set) (map[string]struct{}, []strin
 			volumeName = volume["host_path"].(string)
 		}
 		readOnly := volume["read_only"].(bool)
-
+		flags := volume["flags"].(string)
+		
 		switch {
 		case len(fromContainer) == 0 && len(containerPath) == 0:
 			return retVolumeMap, retHostConfigBinds, retVolumeFromContainers, errors.New("volume entry without container path or source container")
@@ -224,6 +225,9 @@ func volumeSetToDockerVolumes(volumes *schema.Set) (map[string]struct{}, []strin
 			readWrite := "rw"
 			if readOnly {
 				readWrite = "ro"
+			}
+			if len(flags) != 0 {
+				readWrite = flags
 			}
 			retVolumeMap[containerPath] = struct{}{}
 			retHostConfigBinds = append(retHostConfigBinds, volumeName+":"+containerPath+":"+readWrite)

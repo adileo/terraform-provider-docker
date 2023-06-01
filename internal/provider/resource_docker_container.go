@@ -435,6 +435,12 @@ func resourceDockerContainer() *schema.Resource {
 							ForceNew:         true,
 							ValidateDiagFunc: validateDockerContainerPath(),
 						},
+						"flags": {
+							Type:             schema.TypeString,
+							Description:      "The volume option flags.",
+							Optional:         true,
+							ForceNew:         true,
+						},
 						"volume_name": {
 							Type:        schema.TypeString,
 							Description: "The name of the docker volume which should be mounted.",
